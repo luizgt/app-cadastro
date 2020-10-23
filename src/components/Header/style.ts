@@ -23,7 +23,7 @@ const estilo = StyleSheet.create({
   },
   headerTextRosa: {
     fontSize: 40,
-    color: "#ff00a2",
+    color: "#d200d5",
     fontWeight: "bold",
   },
   headerTextBranco: {

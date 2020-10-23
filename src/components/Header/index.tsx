@@ -21,6 +21,10 @@ const tipoTela3 = (
   </View>
 );
 
+/**
+ * Renderiza o header escolhido.
+ * @param valor variável para escolher o header desejado 
+ */
 const renderizarTela = (valor: number) => {
   switch (valor) {
     case 0:
@@ -29,10 +33,12 @@ const renderizarTela = (valor: number) => {
       return tipoTela2;
     case 2:
       return tipoTela3;
+    default:
+      return tipoTela1;
   }
 };
 
-const tipoTela: number = 2;
+const tipoTela: number = 0;
 
 export default function Header() {
   return renderizarTela(tipoTela);
