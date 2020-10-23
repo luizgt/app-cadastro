@@ -6,25 +6,25 @@ import Header from "../../components/Header";
 
 import estilo from "./style";
 
-export default function ColetarResidentes() {
+export default function ColetarEducacao() {
   const [valor, setValor] = useState<number>(0);
-  const [residentes, setResidentes] = useState<boolean>(false);
-
+  const [saude, setSaude] = useState<boolean>(false);
+ 
   return (
     <View style={estilo.container}>
       <Header />
       <View>
         <View style={estilo.viewSubTitulo}>
-          <Text style={estilo.textoSubTitulo}>Residentes</Text>
+          <Text style={estilo.textoSubTitulo}>Socioeconômicos</Text>
           <CheckBox
             disabled={false}
-            value={residentes}
-            onValueChange={(newValue) => setResidentes(newValue)}
+            value={saude}
+            onValueChange={(newValue) => setSaude(newValue)}
             style={estilo.marcadorSubTitulo}
           />
         </View>
         <ScrollView>
-          {residentes === false ? (
+          {saude === false ? (
             <View style={estilo.viewSemResidentes}>
               <Text style={estilo.textSemResidentes}>Sem Residentes</Text>
             </View>
@@ -56,16 +56,19 @@ export default function ColetarResidentes() {
 }
 
 const dados = [
-  { dado: "Mulheres", valor: 0 },
-  { dado: "Homens", valor: 0 },
-  { dado: "Outros gêneros", valor: 0 },
-  { dado: "< 1 ano", valor: 0 },
-  { dado: "1 a 3", valor: 0 },
-  { dado: "4 a 5", valor: 0 },
-  { dado: "6 a 9", valor: 0 },
-  { dado: "10 a 15", valor: 0 },
-  { dado: "16 a 21", valor: 0 },
-  { dado: "22 a 45", valor: 0 },
-  { dado: "45 a 60", valor: 0 },
-  { dado: "> 60 anos", valor: 0 },
+  { dado: "Cardiopatia", valor: 0 },
+  { dado: "Câncer", valor: 0 },
+  { dado: "Def. auditiva", valor: 0 },
+  { dado: "Def. física", valor: 0 },
+  { dado: "Def. mental", valor: 0 },
+  { dado: "Dengue", valor: 0 },
+  { dado: "Dep. Química", valor: 0 },
+  { dado: "Depressão", valor: 0 },
+  { dado: "Dist. linguagem", valor: 0 },
+  { dado: "Fibromialgia", valor: 0 },
+  { dado: "Hanseníase", valor: 0 },
+  { dado: "Hipertensão", valor: 0 },
+  { dado: "Mal de Parkinson", valor: 0 },
+  { dado: "Tuberculose", valor: 0 },
+  { dado: "AIDS", valor: 0 },
 ];

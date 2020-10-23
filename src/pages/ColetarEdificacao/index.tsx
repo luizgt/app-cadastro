@@ -9,7 +9,7 @@ import estilo from "./style";
 
 export default function ColetarEdificacao({}) {
   const [edificacao, setEdificacao] = useState<boolean>(true);
-  
+
   return (
     <View>
       <Header />
@@ -28,9 +28,9 @@ export default function ColetarEdificacao({}) {
             <Text style={estilo.textSemEdificacao}>Sem Edificação</Text>
           </View>
         ) : (
-          telas.map((obj) => (
-            <View style={estilo.viewItemTerreno}>
-              <Text style={estilo.textItemTerreno}>{obj.dado}</Text>
+          telas.map((obj, key) => (
+            <View style={estilo.viewItemTerreno} key={key}>
+              <Text style={estilo.textItemTerreno} >{obj.dado}</Text>
               <RNPickerSelect
                 placeholder={{}}
                 useNativeAndroidPickerStyle={true}

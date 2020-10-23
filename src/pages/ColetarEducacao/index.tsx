@@ -6,25 +6,25 @@ import Header from "../../components/Header";
 
 import estilo from "./style";
 
-export default function ColetarResidentes() {
+export default function ColetarEducacao() {
   const [valor, setValor] = useState<number>(0);
-  const [residentes, setResidentes] = useState<boolean>(false);
+  const [educacao, setEducacao] = useState<boolean>(false);
 
   return (
     <View style={estilo.container}>
       <Header />
       <View>
         <View style={estilo.viewSubTitulo}>
-          <Text style={estilo.textoSubTitulo}>Residentes</Text>
+          <Text style={estilo.textoSubTitulo}>Educação</Text>
           <CheckBox
             disabled={false}
-            value={residentes}
-            onValueChange={(newValue) => setResidentes(newValue)}
+            value={educacao}
+            onValueChange={(newValue) => setEducacao(newValue)}
             style={estilo.marcadorSubTitulo}
           />
         </View>
         <ScrollView>
-          {residentes === false ? (
+          {educacao === false ? (
             <View style={estilo.viewSemResidentes}>
               <Text style={estilo.textSemResidentes}>Sem Residentes</Text>
             </View>
@@ -56,16 +56,14 @@ export default function ColetarResidentes() {
 }
 
 const dados = [
-  { dado: "Mulheres", valor: 0 },
-  { dado: "Homens", valor: 0 },
-  { dado: "Outros gêneros", valor: 0 },
-  { dado: "< 1 ano", valor: 0 },
-  { dado: "1 a 3", valor: 0 },
-  { dado: "4 a 5", valor: 0 },
-  { dado: "6 a 9", valor: 0 },
-  { dado: "10 a 15", valor: 0 },
-  { dado: "16 a 21", valor: 0 },
-  { dado: "22 a 45", valor: 0 },
-  { dado: "45 a 60", valor: 0 },
-  { dado: "> 60 anos", valor: 0 },
+  { dado: "Analfabetos", valor: 0 },
+  { dado: "Creche", valor: 0 },
+  { dado: "Pré pública", valor: 0 },
+  { dado: "Pré particular", valor: 0 },
+  { dado: "Fund. público", valor: 0 },
+  { dado: "Fund. particular", valor: 0 },
+  { dado: "Médio público", valor: 0 },
+  { dado: "Médio particular", valor: 0 },
+  { dado: "Sup. público", valor: 0 },
+  { dado: "Sup. particular", valor: 0 },
 ];
