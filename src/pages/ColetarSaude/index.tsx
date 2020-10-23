@@ -5,17 +5,23 @@ import CheckBox from "@react-native-community/checkbox";
 import Header from "../../components/Header";
 
 import estilo from "./style";
+import { useNavigation } from "@react-navigation/native";
 
 export default function ColetarEducacao() {
   const [valor, setValor] = useState<number>(0);
   const [saude, setSaude] = useState<boolean>(false);
- 
+
+  const { navigate } = useNavigation();
+  function handleNavigateFinalizar() {
+    navigate("qualquerTela");
+  }
+
   return (
     <View style={estilo.container}>
       <Header />
       <View>
         <View style={estilo.viewSubTitulo}>
-          <Text style={estilo.textoSubTitulo}>Socioeconômicos</Text>
+          <Text style={estilo.textoSubTitulo}>Saúde</Text>
           <CheckBox
             disabled={false}
             value={saude}
@@ -50,6 +56,14 @@ export default function ColetarEducacao() {
             ))
           )}
         </ScrollView>
+        <View style={estilo.viewBotaoProximo}>
+          <TouchableOpacity
+            style={estilo.botaoProximo}
+            onPress={handleNavigateFinalizar}
+          >
+            <Text style={estilo.textBotaoProximo}>Próximo</Text>
+          </TouchableOpacity>
+        </View>
       </View>
     </View>
   );

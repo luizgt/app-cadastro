@@ -1,3 +1,4 @@
+import { useNavigation } from "@react-navigation/native";
 import React from "react";
 import { View, Text, TextInput, TouchableOpacity } from "react-native";
 
@@ -6,6 +7,13 @@ import Header from "../../components/Header";
 import estilo from "./style";
 
 export default function ColetarEndereco() {
+
+  const {navigate} = useNavigation();
+
+  function handleNavigateToEdificacao(){
+    navigate('ColetarTerreno')
+  }
+
   return (
     <View>
       <Header />
@@ -20,7 +28,7 @@ export default function ColetarEndereco() {
         <TextInput style={estilo.textInput} placeholder="Cidade"/>
       </View>
       <View style={estilo.viewBotaoProximo}>
-        <TouchableOpacity style={estilo.botaoProximo}>
+        <TouchableOpacity style={estilo.botaoProximo} onPress={handleNavigateToEdificacao}>
           <Text style={estilo.textBotaoProximo}>
             Próximo
           </Text>

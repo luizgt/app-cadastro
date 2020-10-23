@@ -1,3 +1,4 @@
+import { useNavigation } from "@react-navigation/native";
 import React from "react";
 import { View, Text, TouchableOpacity, ScrollView } from "react-native";
 import RNPickerSelect from "react-native-picker-select";
@@ -7,6 +8,12 @@ import Header from "../../components/Header";
 import estilo from "./style";
 
 export default function ColetarTerreno({}) {
+  const { navigate } = useNavigation();
+
+  function handleNavigateToEdificacao() {
+    navigate("ColetarEdificacao");
+  }
+
   return (
     <View>
       <Header />
@@ -14,8 +21,8 @@ export default function ColetarTerreno({}) {
         <Text style={estilo.textoSubTitulo}>Terreno</Text>
       </View>
       <ScrollView style={estilo.scrollview}>
-        {telas.map((obj) => (
-          <View style={estilo.viewItemTerreno}>
+        {telas.map((obj, key) => (
+          <View style={estilo.viewItemTerreno} key={key}>
             <Text style={estilo.textItemTerreno}>{obj.dado}</Text>
             <RNPickerSelect
               placeholder={{}}
@@ -27,6 +34,11 @@ export default function ColetarTerreno({}) {
             />
           </View>
         ))}
+        <View style={estilo.viewBotaoProximo}>
+          <TouchableOpacity style={estilo.botaoProximo} onPress={handleNavigateToEdificacao}>
+            <Text style={estilo.textBotaoProximo}>Próximo</Text>
+          </TouchableOpacity>
+        </View>
       </ScrollView>
     </View>
   );

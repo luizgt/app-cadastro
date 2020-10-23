@@ -5,10 +5,17 @@ import CheckBox from "@react-native-community/checkbox";
 import Header from "../../components/Header";
 
 import estilo from "./style";
+import { useNavigation } from "@react-navigation/native";
 
 export default function ColetarResidentes() {
   const [valor, setValor] = useState<number>(0);
   const [residentes, setResidentes] = useState<boolean>(false);
+
+  const { navigate } = useNavigation();
+
+  function handleNavigateToComunicacao() {
+    navigate("ColetarComunicacao");
+  }
 
   return (
     <View style={estilo.container}>
@@ -49,6 +56,14 @@ export default function ColetarResidentes() {
               </View>
             ))
           )}
+          <View style={estilo.viewBotaoProximo}>
+            <TouchableOpacity
+              style={estilo.botaoProximo}
+              onPress={handleNavigateToComunicacao}
+            >
+              <Text style={estilo.textBotaoProximo}>Próximo</Text>
+            </TouchableOpacity>
+          </View>
         </ScrollView>
       </View>
     </View>

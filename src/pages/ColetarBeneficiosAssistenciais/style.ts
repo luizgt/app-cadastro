@@ -24,16 +24,34 @@ const estilo = StyleSheet.create({
     color: "purple",
   },
 
-  viewLinhaPergunta:{
-      alignContent: "center",
-      flexDirection: "row",
-      marginTop: 15,
-      marginBottom: 15,
-      paddingLeft: 20
+  viewLinhaPergunta: {
+    alignContent: "center",
+    flexDirection: "row",
+    marginTop: 15,
+    marginBottom: 15,
+    paddingLeft: 20,
   },
-  textLinhaPergunta:{
-    fontSize: 25
-  }
+  textLinhaPergunta: {
+    fontSize: 25,
+  },
+
+  viewBotaoProximo: {
+    flexDirection: "row",
+    justifyContent: "center",
+    marginBottom: 10,
+  },
+  botaoProximo: {
+    backgroundColor: "#d200d5",
+    width: 85,
+    height: 40,
+    borderRadius: 5,
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  textBotaoProximo: {
+    color: "white",
+    fontSize: 20,
+  },
 });
 
 export default estilo;

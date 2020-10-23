@@ -18,12 +18,30 @@ const estilo = StyleSheet.create({
     marginBottom: 15,
     paddingLeft: 15,
   },
-  textItemTerreno:{
-      fontSize: 20,
+  textItemTerreno: {
+    fontSize: 20,
   },
-  scrollview:{
+  scrollview: {
     marginBottom: 160,
-  }
+  },
+
+  viewBotaoProximo:{
+    flexDirection: "row",
+    justifyContent: "center",
+    marginBottom: 10
+  },
+  botaoProximo: {
+    backgroundColor: "#d200d5",
+    width: 85,
+    height: 40,
+    borderRadius: 5,
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  textBotaoProximo: {
+    color: "white",
+    fontSize: 20,
+  },
 });
 
 export default estilo;

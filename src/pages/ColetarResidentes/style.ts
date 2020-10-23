@@ -74,7 +74,25 @@ const estilo = StyleSheet.create({
   },
   textSemResidentes:{
     fontSize: 35
-  }
+  },
+
+  viewBotaoProximo:{
+    flexDirection: "row",
+    justifyContent: "center",
+    marginBottom: 10
+  },
+  botaoProximo: {
+    backgroundColor: "#d200d5",
+    width: 85,
+    height: 40,
+    borderRadius: 5,
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  textBotaoProximo: {
+    color: "white",
+    fontSize: 20,
+  },
 
   //   scrollview: {
   //     flex: 1

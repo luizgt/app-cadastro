@@ -13,7 +13,7 @@ const estilo = StyleSheet.create({
     borderLeftWidth: 3,
     borderColor: "purple",
     flexDirection: "row",
-    alignItems: "center"
+    alignItems: "center",
   },
   marcadorSubTitulo: {
     marginLeft: "auto",
@@ -57,14 +57,32 @@ const estilo = StyleSheet.create({
     color: "#3d76dd",
   },
 
-  viewSemResidentes:{
+  viewSemResidentes: {
     justifyContent: "center",
-    alignItems:"center",
-    height: Dimensions.get("window").height * 1/2,
+    alignItems: "center",
+    height: (Dimensions.get("window").height * 1) / 2,
   },
-  textSemResidentes:{
-    fontSize: 35
-  }
+  textSemResidentes: {
+    fontSize: 35,
+  },
+
+  viewBotaoProximo: {
+    flexDirection: "row",
+    justifyContent: "center",
+    marginBottom: 10,
+  },
+  botaoProximo: {
+    backgroundColor: "#d200d5",
+    width: 85,
+    height: 40,
+    borderRadius: 5,
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  textBotaoProximo: {
+    color: "white",
+    fontSize: 20,
+  },
 
   //   scrollview: {
   //     flex: 1

@@ -6,9 +6,15 @@ import RNPickerSelect from "react-native-picker-select";
 import Header from "../../components/Header";
 
 import estilo from "./style";
+import { useNavigation } from "@react-navigation/native";
 
 export default function ColetarEdificacao({}) {
   const [edificacao, setEdificacao] = useState<boolean>(true);
+
+  const { navigate } = useNavigation();
+  function handleNavigateToResidentes(){
+    navigate("ColetarResidentes");
+  }
 
   return (
     <View>
@@ -30,7 +36,7 @@ export default function ColetarEdificacao({}) {
         ) : (
           telas.map((obj, key) => (
             <View style={estilo.viewItemTerreno} key={key}>
-              <Text style={estilo.textItemTerreno} >{obj.dado}</Text>
+              <Text style={estilo.textItemTerreno}>{obj.dado}</Text>
               <RNPickerSelect
                 placeholder={{}}
                 useNativeAndroidPickerStyle={true}
@@ -42,6 +48,14 @@ export default function ColetarEdificacao({}) {
             </View>
           ))
         )}
+        <View style={estilo.viewBotaoProximo}>
+          <TouchableOpacity
+            style={estilo.botaoProximo}
+            onPress={handleNavigateToResidentes}
+          >
+            <Text style={estilo.textBotaoProximo}>Próximo</Text>
+          </TouchableOpacity>
+        </View>
       </ScrollView>
     </View>
   );
