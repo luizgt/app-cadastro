@@ -28,7 +28,9 @@ const estilo = StyleSheet.create({
   viewBotaoProximo:{
     flexDirection: "row",
     justifyContent: "center",
-    marginBottom: 10
+    alignItems: "center",
+    marginBottom: 10,
+    height: 100
   },
   botaoProximo: {
     backgroundColor: "#d200d5",

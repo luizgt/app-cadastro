@@ -1,37 +1,86 @@
 import { useNavigation } from "@react-navigation/native";
-import React from "react";
+import React, { useState } from "react";
 import { View, Text, TextInput, TouchableOpacity } from "react-native";
+import AsyncStorage from "@react-native-community/async-storage";
 
 import Header from "../../components/Header";
 
 import estilo from "./style";
 
 export default function ColetarEndereco() {
+  const [rua, setRua] = useState("");
+  const [numero, setNumero] = useState("");
+  const [complemento, setComplemento] = useState("");
+  const [bairro, setBairro] = useState("");
+  const [cidade, setCidade] = useState("");
 
-  const {navigate} = useNavigation();
+  const { navigate } = useNavigation();
 
-  function handleNavigateToEdificacao(){
-    navigate('ColetarTerreno')
+  async function handleNavigateToEdificacao() {
+    const endereco = {
+      rua: rua,
+      numero: numero,
+      complemento: complemento,
+      bairro: bairro,
+      cidade: cidade,
+    };
+
+    await storeData(endereco);
+    navigate("ColetarTerreno");
   }
 
+  const storeData = async (value: Object) => {
+    try {
+      const valueJSON = JSON.stringify(value);
+      await AsyncStorage.setItem("endereco_atual", valueJSON);
+      console.log("Enredeço salvo:" + value);
+    } catch (e) {
+      console.log("Erro ao salvar endereço.");
+    }
+  };
+
   return (
-    <View>
+    <View style={estilo.container}>
       <Header />
       <View>
         <View style={estilo.viewSubTitulo}>
           <Text style={estilo.textoSubTitulo}>Endereço</Text>
         </View>
-        <TextInput style={estilo.textInput} placeholder="Rua"/>
-        <TextInput style={estilo.textInput} keyboardType="number-pad" placeholder="Número"/>
-        <TextInput style={estilo.textInput} placeholder="Complemento"/>
-        <TextInput style={estilo.textInput} placeholder="Bairro"/>
-        <TextInput style={estilo.textInput} placeholder="Cidade"/>
+        <View style={estilo.viewTextInput}>
+          <TextInput
+            style={estilo.textInput}
+            placeholder="Rua"
+            onChangeText={(text) => setRua(text)}
+          />
+          <TextInput
+            style={estilo.textInput}
+            keyboardType="number-pad"
+            placeholder="Número"
+            onChangeText={(text) => setNumero(text)}
+          />
+          <TextInput
+            style={estilo.textInput}
+            placeholder="Complemento"
+            onChangeText={(text) => setComplemento(text)}
+          />
+          <TextInput
+            style={estilo.textInput}
+            placeholder="Bairro"
+            onChangeText={(text) => setBairro(text)}
+          />
+          <TextInput
+            style={estilo.textInput}
+            placeholder="Cidade"
+            onChangeText={(text) => setCidade(text)}
+          />
+        </View>
       </View>
       <View style={estilo.viewBotaoProximo}>
-        <TouchableOpacity style={estilo.botaoProximo} onPress={handleNavigateToEdificacao}>
-          <Text style={estilo.textBotaoProximo}>
-            Próximo
-          </Text>
+        <TouchableOpacity
+          style={estilo.botaoProximo}
+          onPress={handleNavigateToEdificacao}
+        >
+          <Text style={estilo.textBotaoProximo}>Próximo</Text>
         </TouchableOpacity>
       </View>
     </View>

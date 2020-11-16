@@ -1,6 +1,7 @@
 import { StyleSheet, Platform, Dimensions } from "react-native";
 
 const estilo = StyleSheet.create({
+  container: { height: "100%" },
   textInput: {
     borderWidth: 0.3,
     height: 40,
@@ -23,11 +24,15 @@ const estilo = StyleSheet.create({
     fontSize: 30,
     color: "purple",
   },
-  viewBotaoProximo:{
-    width: "100%",
+  viewTextInput: {
+    flexDirection: "column",
+    justifyContent: "space-between",
+    height: (Dimensions.get("window").height * 2) / 4,
+  },
+  viewBotaoProximo: {
     justifyContent: "center",
     alignItems: "center",
-    marginTop: 20
+    marginTop: 75,
   },
   botaoProximo: {
     backgroundColor: "#d200d5",

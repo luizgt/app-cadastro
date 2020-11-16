@@ -33,7 +33,7 @@ export default function ColetarBeneficiosAssistenciais() {
       <Header />
       <View>
         <View style={estilo.viewSubTitulo}>
-          <Text style={estilo.textoSubTitulo}>Benefícios Assistênciais</Text>
+          <Text style={estilo.textoSubTitulo}>Benefícios Assistenciais</Text>
         </View>
         <View>
           <View style={estilo.viewLinhaPergunta}>

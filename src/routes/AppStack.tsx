@@ -2,6 +2,7 @@ import React from "react";
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 
+import Home from "../pages/Home";
 import ColetarEndereco from "../pages/ColetarEndereco";
 import ColetarTerreno from "../pages/ColetarTerreno";
 import ColetarEdificacao from "../pages/ColetarEdificacao";
@@ -11,6 +12,7 @@ import ColetarBeneficiosAssistenciais from "../pages/ColetarBeneficiosAssistenci
 import ColetarSocioeconomico from "../pages/ColetarSocioeconomico";
 import ColetarSaude from "../pages/ColetarSaude";
 import ColetarComunicacao from "../pages/ColetarComunicacao";
+import GerenciarColetas from "../pages/GerenciarColetas";
 
 const { Navigator, Screen } = createStackNavigator();
 
@@ -18,6 +20,8 @@ export default function AppStack() {
   return (
     <NavigationContainer>
       <Navigator screenOptions={{ headerShown: false }}>
+        <Screen name="Home" component={Home}/>
+        <Screen name="GerenciarColetas" component={GerenciarColetas}/>
         <Screen name="ColetarEndereco" component={ColetarEndereco} />
         <Screen name="ColetarTerreno" component={ColetarTerreno} />
         <Screen name="ColetarEdificacao" component={ColetarEdificacao} />

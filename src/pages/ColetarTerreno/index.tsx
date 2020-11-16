@@ -1,17 +1,75 @@
 import { useNavigation } from "@react-navigation/native";
-import React from "react";
+import React, { useState } from "react";
 import { View, Text, TouchableOpacity, ScrollView } from "react-native";
 import RNPickerSelect from "react-native-picker-select";
+import AsyncStorage from "@react-native-community/async-storage";
 
 import Header from "../../components/Header";
 
 import estilo from "./style";
 
 export default function ColetarTerreno({}) {
+  const [terreno, setTerreno] = useState([
+    { valor: 0 },
+    { valor: 0 },
+    { valor: 0 },
+    { valor: 0 },
+    { valor: 0 },
+    { valor: 0 },
+  ]);
+
+  const storeData = async (value: Object) => {
+    try {
+      const valueJSON = JSON.stringify(value);
+      await AsyncStorage.setItem("terreno_atual", valueJSON);
+      console.log("Endereço salvo:" + value);
+    } catch (e) {
+      console.log("Erro ao salvar endereço.");
+    }
+  };
+
   const { navigate } = useNavigation();
 
-  function handleNavigateToEdificacao() {
-    navigate("ColetarEdificacao");
+  async function handleNavigateToEdificacao() {
+    let validacao = false;
+
+    if (
+      terreno[0].valor != 0 &&
+      terreno[1].valor != 0 &&
+      terreno[2].valor != 0 &&
+      terreno[3].valor != 0 &&
+      terreno[4].valor != 0 &&
+      terreno[5].valor != 0
+    )
+      validacao = true;
+
+    if (validacao) {
+      const dado_terreno = {
+        ocupacao: terreno[0],
+        relevo: terreno[1],
+        uso: terreno[2],
+        patrimonio: terreno[3],
+        limite_testada: terreno[4],
+        caracterizacao: terreno[5],
+      };
+
+      console.log(
+        terreno[0].valor +
+          "\n" +
+          terreno[1].valor +
+          "\n" +
+          terreno[2].valor +
+          "\n" +
+          terreno[3].valor +
+          "\n" +
+          terreno[4].valor +
+          "\n" +
+          terreno[5].valor
+      );
+
+      await storeData(dado_terreno);
+      navigate("ColetarEdificacao");
+    }
   }
 
   return (
@@ -23,19 +81,27 @@ export default function ColetarTerreno({}) {
       <ScrollView style={estilo.scrollview}>
         {telas.map((obj, key) => (
           <View style={estilo.viewItemTerreno} key={key}>
-            <Text style={estilo.textItemTerreno}>{obj.dado}</Text>
+            <Text style={estilo.textItemTerreno}>{obj.nome}</Text>
             <RNPickerSelect
               placeholder={{}}
               useNativeAndroidPickerStyle={true}
-              onValueChange={(value: string, key: number) =>
-                console.warn(value, key)
-              }
+              onValueChange={(value: string, key: number) => {
+                let array_novo = [...terreno];
+                array_novo[obj.dado] = {
+                  objDado: obj.dado.toString(),
+                  valor: value,
+                };
+                setTerreno(array_novo);
+              }}
               items={obj.perguntas}
             />
           </View>
         ))}
         <View style={estilo.viewBotaoProximo}>
-          <TouchableOpacity style={estilo.botaoProximo} onPress={handleNavigateToEdificacao}>
+          <TouchableOpacity
+            style={estilo.botaoProximo}
+            onPress={handleNavigateToEdificacao}
+          >
             <Text style={estilo.textBotaoProximo}>Próximo</Text>
           </TouchableOpacity>
         </View>
@@ -46,111 +112,79 @@ export default function ColetarTerreno({}) {
 
 const telas = [
   {
-    dado: "Estrutura",
-    key: 1,
+    nome: "Ocupação",
+    dado: 0,
     perguntas: [
-      { label: "Vôlei", value: "volley", key: 2 },
-      { label: "Baseball", value: "base", key: 3 },
-      { label: "Hockey", value: "hockey", key: 4 },
+      { label: "Selecionar", value: 0 },
+      { label: "Não construído", value: 1 },
+      { label: "Ruínas", value: 2 },
+      { label: "Em demolição", value: 3 },
+      { label: "Construção paralisada", value: 4 },
+      { label: "Construção andamento", value: 5 },
+      { label: "Construído", value: 6 },
     ],
   },
   {
-    dado: "Revestimento Externo",
-    key: 2,
+    nome: "Relevo",
+    dado: 1,
     perguntas: [
-      { label: "Football", value: "foot", key: 2 },
-      { label: "Baseball", value: "base", key: 3 },
-      { label: "Hockey", value: "hockey", key: 4 },
+      { label: "Selecionar", value: 0 },
+      { label: "Horizontal", value: 1 },
+      { label: "Aclive", value: 2 },
+      { label: "Aclive acentuado", value: 3 },
+      { label: "Declive", value: 4 },
+      { label: "Declive acentuado", value: 5 },
+      { label: "Irregular", value: 6 },
     ],
   },
   {
-    dado: "Piso",
-    key: 3,
+    nome: "Uso",
+    dado: 2,
     perguntas: [
-      { label: "Football", value: "foot", key: 2 },
-      { label: "Baseball", value: "base", key: 3 },
-      { label: "Hockey", value: "hockey", key: 4 },
+      { label: "Selecionar", value: 0 },
+      { label: "Sem uso", value: 1 },
+      { label: "Alugado", value: 2 },
+      { label: "Cedido", value: 3 },
+      { label: "Proprietário", value: 4 },
+      { label: "Outro", value: 5 },
     ],
   },
   {
-    dado: "Forro",
-    key: 4,
+    nome: "Patrimônio",
+    dado: 3,
     perguntas: [
-      { label: "Football", value: "foot", key: 2 },
-      { label: "Baseball", value: "base", key: 3 },
-      { label: "Hockey", value: "hockey", key: 4 },
+      { label: "Selecionar", value: 0 },
+      { label: "Particular", value: 1 },
+      { label: "Associativo", value: 2 },
+      { label: "Religioso", value: 3 },
+      { label: "União", value: 4 },
+      { label: "Estado", value: 5 },
+      { label: "Município", value: 5 },
     ],
   },
   {
-    dado: "Revestimento interno",
-    key: 5,
+    nome: "Limite testada",
+    dado: 4,
     perguntas: [
-      { label: "Football", value: "foot", key: 2 },
-      { label: "Baseball", value: "base", key: 3 },
-      { label: "Hockey", value: "hockey", key: 4 },
+      { label: "Selecionar", value: 0 },
+      { label: "Aberto", value: 1 },
+      { label: "Cerca (arame)", value: 2 },
+      { label: "Cerca (madeira)", value: 3 },
+      { label: "Alambrado", value: 4 },
+      { label: "Calçada", value: 5 },
+      { label: "Muro", value: 6 },
     ],
   },
   {
-    dado: "Pintura",
-    key: 6,
+    nome: "Caracterização",
+    dado: 5,
     perguntas: [
-      { label: "Football", value: "foot", key: 2 },
-      { label: "Baseball", value: "base", key: 3 },
-      { label: "Hockey", value: "hockey", key: 4 },
-    ],
-  },
-  {
-    dado: "Instalação elétrica e hidráulica",
-    key: 7,
-    perguntas: [
-      { label: "Football", value: "foot", key: 2 },
-      { label: "Baseball", value: "base", key: 3 },
-      { label: "Hockey", value: "hockey", key: 4 },
-    ],
-  },
-  {
-    dado: "Cobertura",
-    key: 8,
-    perguntas: [
-      { label: "Football", value: "foot", key: 2 },
-      { label: "Baseball", value: "base", key: 3 },
-      { label: "Hockey", value: "hockey", key: 4 },
-    ],
-  },
-  {
-    dado: "Posição",
-    key: 9,
-    perguntas: [
-      { label: "Football", value: "foot", key: 2 },
-      { label: "Baseball", value: "base", key: 3 },
-      { label: "Hockey", value: "hockey", key: 4 },
-    ],
-  },
-  {
-    dado: "Sit. Construção",
-    key: 10,
-    perguntas: [
-      { label: "Football", value: "foot", key: 2 },
-      { label: "Baseball", value: "base", key: 3 },
-      { label: "Hockey", value: "hockey", key: 4 },
-    ],
-  },
-  {
-    dado: "Esquadrias",
-    key: 11,
-    perguntas: [
-      { label: "Football", value: "foot", key: 2 },
-      { label: "Baseball", value: "base", key: 3 },
-      { label: "Hockey", value: "hockey", key: 4 },
-    ],
-  },
-  {
-    dado: "Estado de conservação",
-    key: 12,
-    perguntas: [
-      { label: "Football", value: "foot", key: 2 },
-      { label: "Baseball", value: "base", key: 3 },
-      { label: "Hockey", value: "hockey", key: 4 },
+      { label: "Selecionar", value: 0 },
+      { label: "Residencial", value: 1 },
+      { label: "Comercial", value: 2 },
+      { label: "Industrial", value: 3 },
+      { label: "Serviços", value: 4 },
+      { label: "Outros", value: 5 },
     ],
   },
 ];

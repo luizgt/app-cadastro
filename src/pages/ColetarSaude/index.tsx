@@ -55,15 +55,15 @@ export default function ColetarEducacao() {
               </View>
             ))
           )}
+          <View style={estilo.viewBotaoProximo}>
+            <TouchableOpacity
+              style={estilo.botaoProximo}
+              onPress={handleNavigateFinalizar}
+            >
+              <Text style={estilo.textBotaoProximo}>Próximo</Text>
+            </TouchableOpacity>
+          </View>
         </ScrollView>
-        <View style={estilo.viewBotaoProximo}>
-          <TouchableOpacity
-            style={estilo.botaoProximo}
-            onPress={handleNavigateFinalizar}
-          >
-            <Text style={estilo.textBotaoProximo}>Próximo</Text>
-          </TouchableOpacity>
-        </View>
       </View>
     </View>
   );
