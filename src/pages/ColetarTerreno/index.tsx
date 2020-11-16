@@ -9,37 +9,29 @@ import Header from "../../components/Header";
 import estilo from "./style";
 
 export default function ColetarTerreno({}) {
-  const [terreno, setTerreno] = useState([
-    { valor: 0 },
-    { valor: 0 },
-    { valor: 0 },
-    { valor: 0 },
-    { valor: 0 },
-    { valor: 0 },
-  ]);
-
   const storeData = async (value: Object) => {
     try {
       const valueJSON = JSON.stringify(value);
       await AsyncStorage.setItem("terreno_atual", valueJSON);
       console.log("Endereço salvo:" + value);
     } catch (e) {
-      console.log("Erro ao salvar endereço.");
+      console.log("Erro ao salvar terreno.");
     }
   };
 
+  const [terreno, setTerreno] = useState([0, 0, 0, 0, 0, 0]);
   const { navigate } = useNavigation();
 
   async function handleNavigateToEdificacao() {
     let validacao = false;
 
     if (
-      terreno[0].valor != 0 &&
-      terreno[1].valor != 0 &&
-      terreno[2].valor != 0 &&
-      terreno[3].valor != 0 &&
-      terreno[4].valor != 0 &&
-      terreno[5].valor != 0
+      terreno[0] != 0 &&
+      terreno[1] != 0 &&
+      terreno[2] != 0 &&
+      terreno[3] != 0 &&
+      terreno[4] != 0 &&
+      terreno[5] != 0
     )
       validacao = true;
 
@@ -54,17 +46,17 @@ export default function ColetarTerreno({}) {
       };
 
       console.log(
-        terreno[0].valor +
+        terreno[0] +
           "\n" +
-          terreno[1].valor +
+          terreno[1] +
           "\n" +
-          terreno[2].valor +
+          terreno[2] +
           "\n" +
-          terreno[3].valor +
+          terreno[3] +
           "\n" +
-          terreno[4].valor +
+          terreno[4] +
           "\n" +
-          terreno[5].valor
+          terreno[5]
       );
 
       await storeData(dado_terreno);
@@ -87,10 +79,7 @@ export default function ColetarTerreno({}) {
               useNativeAndroidPickerStyle={true}
               onValueChange={(value: string, key: number) => {
                 let array_novo = [...terreno];
-                array_novo[obj.dado] = {
-                  objDado: obj.dado.toString(),
-                  valor: value,
-                };
+                array_novo[obj.dado] = parseInt(value);
                 setTerreno(array_novo);
               }}
               items={obj.perguntas}

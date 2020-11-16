@@ -7,13 +7,26 @@ import Header from "../../components/Header";
 import { render } from "react-dom";
 import { useNavigation } from "@react-navigation/native";
 import { TouchableOpacity } from "react-native-gesture-handler";
+import AsyncStorage from "@react-native-community/async-storage";
+
+/**
+ * tipo de objeto para salvar no armazenamento local.
+ */
 
 export default function ColetarBeneficiosAssistenciais() {
+
   const [marcador0, setMarcador0] = useState(false);
   const [marcador1, setMarcador1] = useState(false);
-  const [marcador2, setMarcador2] = useState(false);
-  const [marcador3, setMarcador3] = useState(false);
-  const [marcador4, setMarcador4] = useState(false);
+  
+  const storeData = async (value: Object) => {
+    try {
+      const valueJSON = JSON.stringify(value);
+      await AsyncStorage.setItem("comunicacao_atual", valueJSON);
+      console.log("Comunicação salva:" + value);
+    } catch (e) {
+      console.log("Erro ao salvar comunicação.");
+    }
+  };
 
   const dados = [
     { dado: "Telefone Fixo", checked: false },
@@ -22,6 +35,13 @@ export default function ColetarBeneficiosAssistenciais() {
 
   const {navigate} = useNavigation();
   function handleNavigateToEducacao(){
+
+    const dado_comunicacao = {
+      telefone_fixo: marcador0,
+      internet: marcador1
+    }
+
+    storeData(dado_comunicacao);
     navigate("ColetarEducacao");
   }
 

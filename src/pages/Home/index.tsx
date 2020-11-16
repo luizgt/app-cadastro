@@ -36,11 +36,6 @@ export default function Home() {
    * seta o novo valor de índice de coletas e chama a próxima tela.
    */
   async function handleNavigateToEndereco() {
-    let proximo_indice = await getData();
-
-    proximo_indice = `${parseInt(proximo_indice) + 1}`;
-
-    await storeData(proximo_indice);
     navigate("ColetarEndereco");
   }
   function handleNavigateToGerenciarColetas() {

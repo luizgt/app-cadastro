@@ -7,8 +7,19 @@ import Header from "../../components/Header";
 import { render } from "react-dom";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import { useNavigation } from "@react-navigation/native";
+import AsyncStorage from "@react-native-community/async-storage";
 
 export default function ColetarBeneficiosAssistenciais() {
+  const storeData = async (value: Object) => {
+    try {
+      const valueJSON = JSON.stringify(value);
+      await AsyncStorage.setItem("beneficio_assistencial_atual", valueJSON);
+      console.log("Beneficios assistenciais salvos:" + value);
+    } catch (e) {
+      console.log("Erro ao salvar benefícios assistênciais.");
+    }
+  };
+
   const [marcador0, setMarcador0] = useState(false);
   const [marcador1, setMarcador1] = useState(false);
   const [marcador2, setMarcador2] = useState(false);
@@ -25,6 +36,15 @@ export default function ColetarBeneficiosAssistenciais() {
 
   const { navigate } = useNavigation();
   function handleNavigateToSocioeconomicos() {
+    const dado_benefAssistencial = {
+      acao_jovem: marcador0,
+      bolsa_familia: marcador1,
+      bpc: marcador2,
+      renda_cidada: marcador3,
+      viva_leite: marcador4,
+    };
+
+    storeData(dado_benefAssistencial);
     navigate("ColetarSocioeconomico");
   }
 
