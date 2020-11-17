@@ -48,7 +48,7 @@ export default function ColetarResidentes() {
     const dado_residentes = {
       mulheres: array_respostas[0],
       homens: array_respostas[1],
-      outros_gêneros: array_respostas[2],
+      outros_generos: array_respostas[2],
       um_ano: array_respostas[3],
       um_a_tres: array_respostas[4],
       quatro_a_cinco: array_respostas[5],

@@ -35,12 +35,12 @@ export default function GerenciarColetas() {
   }
 
   // obterEndereco();
-  
+
   return (
     <View style={estilo.container}>
       <Header estilo={0} titulo="Dados Coletados" />
       <ScrollView style={estilo.container}>
-        {dados_coletados.map((dado_coleta:Coleta, index) => {
+        {dados_coletados.map((dado_coleta: Coleta, index) => {
           return (
             <View style={estilo.cardColeta} key={index}>
               <View style={estilo.viewCardColeta}>
@@ -72,7 +72,10 @@ export default function GerenciarColetas() {
                 </Text>
 
                 <View style={estilo.viewBotoes}>
-                  <TouchableHighlight style={estilo.botaoSalvar} onPress={() => enviarDadosParaBanco(dado_coleta)}>
+                  <TouchableHighlight
+                    style={estilo.botaoSalvar}
+                    onPress={() => enviarDadosParaBanco(dado_coleta)}
+                  >
                     <Text style={estilo.textoSalvar}>Enviar Dados</Text>
                   </TouchableHighlight>
 
@@ -88,34 +91,31 @@ export default function GerenciarColetas() {
     </View>
   );
 
-  function enviarDadosParaBanco(dados:Coleta){
-    fetch("http://192.168.1.103:8080/add_lote",{
-      method: 'post',
-      body: JSON.stringify(dados)
-    }).then(function(response){
-      return response.json();
-    }).then(
-      function(data) {
-        console.log(data);
-      }
-    )
+  async function enviarDadosParaBanco(dados: Coleta) {
+    await fetch("http://192.168.1.103:8080/armazenar_coleta", {
+      method: "POST",
+      body: JSON.stringify(dados),
+      headers: { "Content-Type": "application/json" },
+    }).catch((err) => {
+      alert("Dados não enviados " + err);
+    });
   }
 
   type Coleta = {
     endereco: {
-      rua:string,
-      numero:string,
-      complemento:string,
-      bairro:string,
-      cidade:string
-    },
-    terreno: Object,
-    edificacao: Object,
-    residentes: Object,
-    comunicacao: Object,
-    educacao: Object,
-    beneficios: Object,
-    socioeconomicos: Object,
-    doencas: Object,
-  }
+      rua: string;
+      numero: string;
+      complemento: string;
+      bairro: string;
+      cidade: string;
+    };
+    terreno: Object;
+    edificacao: Object;
+    residentes: Object;
+    comunicacao: Object;
+    educacao: Object;
+    beneficios: Object;
+    socioeconomicos: Object;
+    doencas: Object;
+  };
 }
