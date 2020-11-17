@@ -50,7 +50,7 @@ export default function ColetarBeneficiosAssistenciais() {
 
   return (
     <View style={estilo.container}>
-      <Header />
+      <Header estilo={0} titulo="Coletar Dados" />
       <View>
         <View style={estilo.viewSubTitulo}>
           <Text style={estilo.textoSubTitulo}>Benefícios Assistenciais</Text>

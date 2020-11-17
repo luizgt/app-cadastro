@@ -66,7 +66,7 @@ export default function ColetarTerreno({}) {
 
   return (
     <View>
-      <Header />
+      <Header estilo={0} titulo="Coletar Dados" />
       <View style={estilo.viewSubTitulo}>
         <Text style={estilo.textoSubTitulo}>Terreno</Text>
       </View>

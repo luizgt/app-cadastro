@@ -37,9 +37,10 @@ export default function ColetarEducacao() {
 
   const { navigate } = useNavigation();
   function handleNavigateSaude() {
-    if (!socioeconomicos){ // sem dados socioeconomicos
+    if (!socioeconomicos) {
+      // sem dados socioeconomicos
       storeData(0);
-      navigate("ColetarSaude");  
+      navigate("ColetarSaude");
       return;
     }
 
@@ -64,7 +65,7 @@ export default function ColetarEducacao() {
 
   return (
     <View style={estilo.container}>
-      <Header />
+      <Header estilo={0} titulo="Coletar Dados" />
       <View>
         <View style={estilo.viewSubTitulo}>
           <Text style={estilo.textoSubTitulo}>Socioeconômicos</Text>

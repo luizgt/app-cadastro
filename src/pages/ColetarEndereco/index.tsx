@@ -41,7 +41,7 @@ export default function ColetarEndereco() {
 
   return (
     <View style={estilo.container}>
-      <Header />
+      <Header estilo={0} titulo="Coletar Dados" />
       <View>
         <View style={estilo.viewSubTitulo}>
           <Text style={estilo.textoSubTitulo}>Endereço</Text>

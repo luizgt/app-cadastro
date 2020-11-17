@@ -35,7 +35,7 @@ export default function ColetarEducacao() {
 
   const { navigate } = useNavigation();
   function handleNavigateToBeneficiosAssistenciais() {
-    if(!educacao){
+    if (!educacao) {
       storeData(0);
       navigate("ColetarBeneficiosAssistenciais");
       return;
@@ -60,7 +60,7 @@ export default function ColetarEducacao() {
 
   return (
     <View style={estilo.container}>
-      <Header />
+      <Header estilo={0} titulo="Coletar Dados" />
       <View>
         <View style={estilo.viewSubTitulo}>
           <Text style={estilo.textoSubTitulo}>Educação</Text>

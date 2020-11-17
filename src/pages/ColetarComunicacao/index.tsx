@@ -14,10 +14,9 @@ import AsyncStorage from "@react-native-community/async-storage";
  */
 
 export default function ColetarBeneficiosAssistenciais() {
-
   const [marcador0, setMarcador0] = useState(false);
   const [marcador1, setMarcador1] = useState(false);
-  
+
   const storeData = async (value: Object) => {
     try {
       const valueJSON = JSON.stringify(value);
@@ -30,16 +29,15 @@ export default function ColetarBeneficiosAssistenciais() {
 
   const dados = [
     { dado: "Telefone Fixo", checked: false },
-    { dado: "Internet", checked: false }
+    { dado: "Internet", checked: false },
   ];
 
-  const {navigate} = useNavigation();
-  function handleNavigateToEducacao(){
-
+  const { navigate } = useNavigation();
+  function handleNavigateToEducacao() {
     const dado_comunicacao = {
       telefone_fixo: marcador0,
-      internet: marcador1
-    }
+      internet: marcador1,
+    };
 
     storeData(dado_comunicacao);
     navigate("ColetarEducacao");
@@ -47,7 +45,7 @@ export default function ColetarBeneficiosAssistenciais() {
 
   return (
     <View style={estilo.container}>
-      <Header />
+      <Header estilo={0} titulo="Coletar Dados" />
       <View>
         <View style={estilo.viewSubTitulo}>
           <Text style={estilo.textoSubTitulo}>Comunicação</Text>

@@ -33,7 +33,7 @@ export default function ColetarEducacao() {
     try {
       const value = await AsyncStorage.getItem(id_dado);
       if (value !== null) {
-        return value;
+        return JSON.parse(value);
       }
     } catch (e) {
       console.warn("Erro ao obter dado...");
@@ -98,27 +98,25 @@ export default function ColetarEducacao() {
     const doencas = await getData("saude_atual");
 
     let array = await getData("array_coletas");
-
-    if (array === null || array === undefined) {
-      //caso nenhuma coleta tenha sido feita ainda
+    
+    //caso nenhuma coleta tenha sido feita ainda
+    if (array === null || array.length === 0) {
       const array_coletas = [
         {
-          endereco: JSON.parse(endereco),
-          terreno: JSON.parse(terreno),
-          edificacao: JSON.parse(edificacao),
-          residentes: JSON.parse(residentes),
-          comunicacao: JSON.parse(comunicacao),
-          educacao: JSON.parse(educacao),
-          beneficios: JSON.parse(beneficios),
-          socioeconomicos: JSON.parse(socioeconomicos),
-          doencas: JSON.parse(doencas),
+          endereco: endereco === undefined ? "" : JSON.parse(endereco),
+          terreno: terreno === undefined ? "" : JSON.parse(terreno),
+          edificacao: edificacao === undefined ? "" : JSON.parse(edificacao),
+          residentes: residentes === undefined ? "" : JSON.parse(residentes),
+          comunicacao: comunicacao === undefined ? "" : JSON.parse(comunicacao),
+          educacao: educacao === undefined ? "" : JSON.parse(educacao),
+          beneficios: beneficios === undefined ? "" : JSON.parse(beneficios),
+          socioeconomicos: socioeconomicos === undefined ? "" : JSON.parse(socioeconomicos),
+          doencas: doencas === undefined ? "" : JSON.parse(doencas),
         },
       ];
 
       storeColeta(array_coletas);
     } else {
-      array = JSON.parse(array);
-
       const coleta = {
         endereco: endereco,
         terreno: terreno,
@@ -140,7 +138,7 @@ export default function ColetarEducacao() {
 
   return (
     <View style={estilo.container}>
-      <Header />
+      <Header estilo={0} titulo="Coletar Dados" />
       <View>
         <View style={estilo.viewSubTitulo}>
           <Text style={estilo.textoSubTitulo}>Saúde</Text>
@@ -188,7 +186,7 @@ export default function ColetarEducacao() {
               style={estilo.botaoProximo}
               onPress={handleNavigateFinalizar}
             >
-              <Text style={estilo.textBotaoProximo}>Próximo</Text>
+              <Text style={estilo.textBotaoProximo}>Finalizar</Text>
             </TouchableOpacity>
           </View>
         </ScrollView>

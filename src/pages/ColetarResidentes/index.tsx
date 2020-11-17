@@ -66,7 +66,7 @@ export default function ColetarResidentes() {
 
   return (
     <View style={estilo.container}>
-      <Header />
+      <Header estilo={0} titulo="Coletar Dados" />
       <View>
         <View style={estilo.viewSubTitulo}>
           <Text style={estilo.textoSubTitulo}>Residentes</Text>
@@ -110,7 +110,10 @@ export default function ColetarResidentes() {
             ))
           )}
           <View style={estilo.viewBotaoProximo}>
-            <TouchableOpacity style={estilo.botaoProximo} onPress={handleNavigateToComunicacao}>
+            <TouchableOpacity
+              style={estilo.botaoProximo}
+              onPress={handleNavigateToComunicacao}
+            >
               <Text style={estilo.textBotaoProximo}>Próximo</Text>
             </TouchableOpacity>
           </View>
