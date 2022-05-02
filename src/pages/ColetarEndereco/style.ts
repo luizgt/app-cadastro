@@ -29,6 +29,11 @@ const estilo = StyleSheet.create({
     justifyContent: "space-between",
     height: (Dimensions.get("window").height * 2) / 4,
   },
+  textItemCidade: {
+    fontSize: 20,
+    marginLeft: 10,
+    marginBottom: 0
+  },
   viewBotaoProximo: {
     justifyContent: "center",
     alignItems: "center",

@@ -1,7 +1,10 @@
 import { useNavigation } from "@react-navigation/native";
 import React, { useState } from "react";
 import { View, Text, TextInput, TouchableOpacity } from "react-native";
-import AsyncStorage from "@react-native-community/async-storage";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import RNPickerSelect from "react-native-picker-select";
+
+import cidades from "./cidades";
 
 import Header from "../../components/Header";
 
@@ -24,7 +27,7 @@ export default function ColetarEndereco() {
       bairro: bairro,
       cidade: cidade,
     };
-
+    
     await storeData(endereco);
     navigate("ColetarTerreno");
   }
@@ -68,10 +71,18 @@ export default function ColetarEndereco() {
             placeholder="Bairro"
             onChangeText={(text) => setBairro(text)}
           />
-          <TextInput
-            style={estilo.textInput}
-            placeholder="Cidade"
-            onChangeText={(text) => setCidade(text)}
+
+          <Text style={estilo.textItemCidade}>Cidade</Text>
+          <RNPickerSelect
+            placeholder={{}}
+            useNativeAndroidPickerStyle={true}
+            onValueChange={(value: number, key: number) => {
+              let cidade_novo = cidades[value].label;
+
+              console.log(cidade_novo);
+              setCidade(cidade_novo);
+            }}
+            items={cidades}
           />
         </View>
       </View>

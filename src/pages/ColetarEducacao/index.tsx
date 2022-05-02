@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import { View, Text, TouchableOpacity, ScrollView } from "react-native";
-import CheckBox from "@react-native-community/checkbox";
+import CheckBox from 'expo-checkbox';
 import { useNavigation } from "@react-navigation/native";
-import AsyncStorage from "@react-native-community/async-storage";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 import Header from "../../components/Header";
 import estilo from "./style";

@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import { View, Text, TouchableOpacity, ScrollView } from "react-native";
-import CheckBox from "@react-native-community/checkbox";
+import CheckBox from 'expo-checkbox';
 import RNPickerSelect from "react-native-picker-select";
 import { useNavigation } from "@react-navigation/native";
-import AsyncStorage from "@react-native-community/async-storage";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 import Header from "../../components/Header";
 import estilo from "./style";
@@ -111,8 +111,8 @@ export default function ColetarEdificacao({}) {
               <RNPickerSelect
                 placeholder={{}}
                 useNativeAndroidPickerStyle={true}
-                onValueChange={(value: string, key: number) => {
-                  let array_novo = [...array_respostas];
+                onValueChange={(value: number, key: number) => {
+                  let array_novo:any = [...array_respostas];
                   array_novo[obj.dado] = { ObjDado: obj.dado, valor: value };
 
                   setArrayEdificacao(array_novo);

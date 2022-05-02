@@ -1,13 +1,13 @@
 import React, { useState } from "react";
 import { Text, View } from "react-native";
-import CheckBox from "@react-native-community/checkbox";
+import CheckBox from 'expo-checkbox';
 
 import estilo from "./style";
 import Header from "../../components/Header";
 import { render } from "react-dom";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import { useNavigation } from "@react-navigation/native";
-import AsyncStorage from "@react-native-community/async-storage";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 export default function ColetarBeneficiosAssistenciais() {
   const storeData = async (value: Object) => {

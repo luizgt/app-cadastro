@@ -4,7 +4,7 @@ import { View, Text, ScrollView, TouchableHighlight } from "react-native";
 import Header from "../../components/Header";
 
 import estilo from "./style";
-import AsyncStorage from "@react-native-community/async-storage";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 export default function GerenciarColetas() {
   const { navigate } = useNavigation();
@@ -28,13 +28,21 @@ export default function GerenciarColetas() {
 
   async function obterDados() {
     let array_dados = await getData("array_coletas");
+    console.log(array_dados);
     const dado = array_dados === undefined ? [] : await JSON.parse(array_dados);
 
     await setDados(dados_coletados.concat(dado));
     // console.log(dados_coletados);
   }
 
-  // obterEndereco();
+  async function atualizarColetas(value: Object){
+    try {
+      const valueJSON = JSON.stringify(value);
+      await AsyncStorage.setItem("array_coletas", valueJSON);
+    } catch (e) {
+      console.log("Erro ao atualizar coletas.");
+    }
+  };
 
   return (
     <View style={estilo.container}>
@@ -79,7 +87,10 @@ export default function GerenciarColetas() {
                     <Text style={estilo.textoSalvar}>Enviar Dados</Text>
                   </TouchableHighlight>
 
-                  <TouchableHighlight style={estilo.botaoExcluir}>
+                  <TouchableHighlight 
+                    style={estilo.botaoExcluir}
+                    onPress={() => excluirDado(index)}
+                  >
                     <Text style={estilo.textoExcluir}>Excluir Dados</Text>
                   </TouchableHighlight>
                 </View>
@@ -99,6 +110,19 @@ export default function GerenciarColetas() {
     }).catch((err) => {
       alert("Dados não enviados " + err);
     });
+  }
+
+  async function excluirDado(index:number) {
+    let aux_excluirItem = [... dados_coletados];
+
+    aux_excluirItem.splice(index,1);
+    // console.log("\n");
+    // for(let aux = 0; aux < aux_excluirItem.length; aux++){
+    //   console.log(aux_excluirItem[aux].endereco.rua);
+    // }
+    
+    setDados([...aux_excluirItem]);
+    atualizarColetas([...aux_excluirItem]);
   }
 
   type Coleta = {

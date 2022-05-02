@@ -1,12 +1,12 @@
 import React, { useState } from "react";
 import { View, Text, TouchableOpacity, ScrollView } from "react-native";
-import CheckBox from "@react-native-community/checkbox";
+import CheckBox from 'expo-checkbox';;
 
 import Header from "../../components/Header";
 
 import estilo from "./style";
 import { useNavigation } from "@react-navigation/native";
-import AsyncStorage from "@react-native-community/async-storage";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 export default function ColetarEducacao() {
   const storeData = async (value: Object) => {
@@ -62,6 +62,7 @@ export default function ColetarEducacao() {
   const { navigate } = useNavigation();
 
   async function handleNavigateFinalizar() {
+    console.log(saude);
     if (!saude) {
       //sem dados sobre saude
       await storeData(0);
@@ -98,23 +99,22 @@ export default function ColetarEducacao() {
     const doencas = await getData("saude_atual");
 
     let array = await getData("array_coletas");
-    
+
     //caso nenhuma coleta tenha sido feita ainda
-    if (array === null || array.length === 0) {
+    if (array === null || array === undefined || array!.length === 0) {
       const array_coletas = [
         {
-          endereco: endereco === undefined ? "" : JSON.parse(endereco),
-          terreno: terreno === undefined ? "" : JSON.parse(terreno),
-          edificacao: edificacao === undefined ? "" : JSON.parse(edificacao),
-          residentes: residentes === undefined ? "" : JSON.parse(residentes),
-          comunicacao: comunicacao === undefined ? "" : JSON.parse(comunicacao),
-          educacao: educacao === undefined ? "" : JSON.parse(educacao),
-          beneficios: beneficios === undefined ? "" : JSON.parse(beneficios),
-          socioeconomicos: socioeconomicos === undefined ? "" : JSON.parse(socioeconomicos),
-          doencas: doencas === undefined ? "" : JSON.parse(doencas),
+          endereco: endereco === undefined ? "" : endereco,
+          terreno: terreno ? "" : terreno,
+          edificacao: edificacao ? "" : edificacao,
+          residentes: residentes ? "" : residentes,
+          comunicacao: comunicacao ? "" : comunicacao,
+          educacao: educacao ? "" : educacao,
+          beneficios: beneficios ? "" : beneficios,
+          socioeconomicos: socioeconomicos ? "" : socioeconomicos,
+          doencas: doencas ? "" : doencas,
         },
       ];
-
       storeColeta(array_coletas);
     } else {
       const coleta = {
