@@ -6,6 +6,7 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 
 import Header from "../../components/Header";
 import estilo from "./style";
+import components from "../../styles/components";
 
 export default function ColetarEducacao() {
   const storeData = async (value: Object) => {
@@ -62,8 +63,8 @@ export default function ColetarEducacao() {
     <View style={estilo.container}>
       <Header estilo={0} titulo="Coletar Dados" />
       <View>
-        <View style={estilo.viewSubTitulo}>
-          <Text style={estilo.textoSubTitulo}>Educação</Text>
+        <View style={components.viewSubTitulo}>
+          <Text style={components.textoSubTitulo}>Educação</Text>
           <CheckBox
             disabled={false}
             value={educacao}
@@ -106,10 +107,10 @@ export default function ColetarEducacao() {
 
           <View style={estilo.viewBotaoProximo}>
             <TouchableOpacity
-              style={estilo.botaoProximo}
+              style={components.botaoProximo}
               onPress={handleNavigateToBeneficiosAssistenciais}
             >
-              <Text style={estilo.textBotaoProximo}>Próximo</Text>
+              <Text style={components.textBotaoProximo}>Próximo</Text>
             </TouchableOpacity>
           </View>
         </ScrollView>

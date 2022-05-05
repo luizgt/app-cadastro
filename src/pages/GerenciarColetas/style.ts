@@ -29,7 +29,6 @@ const estilo = StyleSheet.create({
   viewCardColeta:{
     padding: 5,
     margin: 10,
-    backgroundColor: "#463b88",
     borderRadius: 5,
     marginBottom: 5
   },

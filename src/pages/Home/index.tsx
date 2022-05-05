@@ -3,6 +3,7 @@ import { useNavigation } from "@react-navigation/native";
 import { View, Text, TouchableOpacity, AsyncStorage } from "react-native";
 
 import estilo from "./style";
+import cores from "../../styles/colors";
 
 export default function Home() {
   const [indice_banco_local, setIndiceArmazenamento] = useState("armazenamento_1");
@@ -46,7 +47,7 @@ export default function Home() {
     <View style={estilo.container}>
       <View style={estilo.container_botoes}>
         <TouchableOpacity
-          style={[estilo.botao_comecar, estilo.largura_botoes]}
+          style={[estilo.botao_comecar, estilo.largura_botoes, cores.background_azulescuro]}
           onPress={handleNavigateToEndereco}
         >
           <Text style={estilo.text_botao}>Iniciar Coleta</Text>
@@ -57,6 +58,7 @@ export default function Home() {
             estilo.botao_visualizar,
             estilo.margin_top20,
             estilo.largura_botoes,
+            cores.background_azulmedio
           ]}
           onPress={handleNavigateToGerenciarColetas}
         >

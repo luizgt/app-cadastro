@@ -7,6 +7,7 @@ import Header from "../../components/Header";
 import estilo from "./style";
 import { useNavigation } from "@react-navigation/native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import components from "../../styles/components";
 
 export default function ColetarEducacao() {
   const storeData = async (value: Object) => {
@@ -140,8 +141,8 @@ export default function ColetarEducacao() {
     <View style={estilo.container}>
       <Header estilo={0} titulo="Coletar Dados" />
       <View>
-        <View style={estilo.viewSubTitulo}>
-          <Text style={estilo.textoSubTitulo}>Saúde</Text>
+        <View style={components.viewSubTitulo}>
+          <Text style={components.textoSubTitulo}>Saúde</Text>
           <CheckBox
             disabled={false}
             value={saude}
@@ -183,10 +184,10 @@ export default function ColetarEducacao() {
           )}
           <View style={estilo.viewBotaoProximo}>
             <TouchableOpacity
-              style={estilo.botaoProximo}
+              style={components.botaoProximo}
               onPress={handleNavigateFinalizar}
             >
-              <Text style={estilo.textBotaoProximo}>Finalizar</Text>
+              <Text style={components.textBotaoProximo}>Finalizar</Text>
             </TouchableOpacity>
           </View>
         </ScrollView>

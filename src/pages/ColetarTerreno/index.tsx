@@ -7,6 +7,7 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import Header from "../../components/Header";
 
 import estilo from "./style";
+import components from "../../styles/components";
 
 export default function ColetarTerreno({}) {
   const storeData = async (value: Object) => {
@@ -19,7 +20,7 @@ export default function ColetarTerreno({}) {
     }
   };
 
-  const [terreno, setTerreno] = useState([0, 0, 0, 0, 0, 0]);
+  const [terreno, setTerreno] = useState([0, 0, 0, 0, 0, 0, 0]);
   const { navigate } = useNavigation();
 
   async function handleNavigateToEdificacao() {
@@ -31,7 +32,8 @@ export default function ColetarTerreno({}) {
       terreno[2] != 0 &&
       terreno[3] != 0 &&
       terreno[4] != 0 &&
-      terreno[5] != 0
+      terreno[5] != 0 &&
+      terreno[6] != 0 
     )
       validacao = true;
 
@@ -43,6 +45,7 @@ export default function ColetarTerreno({}) {
         patrimonio: terreno[3],
         limite_testada: terreno[4],
         caracterizacao: terreno[5],
+        tipo: terreno[6]
       };
 
       console.log(
@@ -56,19 +59,33 @@ export default function ColetarTerreno({}) {
           "\n" +
           terreno[4] +
           "\n" +
-          terreno[5]
+          terreno[5] +
+          "\n" +
+          terreno[6]
       );
 
       await storeData(dado_terreno);
       navigate("ColetarEdificacao");
+    } else{
+      let array_validacao:String = "";
+      
+      terreno[0] ? <></> : array_validacao += "> Ocupação\n";
+      terreno[1] ? <></> : array_validacao += "> Relevo\n";
+      terreno[2] ? <></> : array_validacao += "> Uso\n";
+      terreno[3] ? <></> : array_validacao += "> Patrimônio\n";
+      terreno[4] ? <></> : array_validacao += "> Limite Testada\n";
+      terreno[5] ? <></> : array_validacao += "> Caracterização\n";
+      terreno[6] ? <></> : array_validacao += "> Tipo\n";
+
+      alert("Dados incompletos! Favor preencher: \n" + array_validacao);
     }
   }
 
   return (
     <View>
       <Header estilo={0} titulo="Coletar Dados" />
-      <View style={estilo.viewSubTitulo}>
-        <Text style={estilo.textoSubTitulo}>Terreno</Text>
+      <View style={components.viewSubTitulo}>
+        <Text style={components.textoSubTitulo}>Terreno</Text>
       </View>
       <ScrollView style={estilo.scrollview}>
         {telas.map((obj, key) => (
@@ -88,10 +105,10 @@ export default function ColetarTerreno({}) {
         ))}
         <View style={estilo.viewBotaoProximo}>
           <TouchableOpacity
-            style={estilo.botaoProximo}
+            style={components.botaoProximo}
             onPress={handleNavigateToEdificacao}
           >
-            <Text style={estilo.textBotaoProximo}>Próximo</Text>
+            <Text style={components.textBotaoProximo}>Próximo</Text>
           </TouchableOpacity>
         </View>
       </ScrollView>
@@ -176,4 +193,14 @@ const telas = [
       { label: "Outros", value: 5 },
     ],
   },
+  {
+    nome: "Tipo",
+    dado: 6,
+    perguntas: [
+      { label: "Selecionar", value: 0 },
+      { label: "Assentamento Rural", value: 1 },
+      { label: "Imóvel Rural", value: 2 },
+      { label: "Imóvel Urbano", value: 3 }
+    ],
+  }
 ];

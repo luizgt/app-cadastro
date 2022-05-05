@@ -4,6 +4,7 @@ import { View, Text, ScrollView, TouchableHighlight } from "react-native";
 import Header from "../../components/Header";
 
 import estilo from "./style";
+import colors from "../../styles/colors";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
 export default function GerenciarColetas() {
@@ -51,7 +52,7 @@ export default function GerenciarColetas() {
         {dados_coletados.map((dado_coleta: Coleta, index) => {
           return (
             <View style={estilo.cardColeta} key={index}>
-              <View style={estilo.viewCardColeta}>
+              <View style={[estilo.viewCardColeta, colors.background_azulmedio]}>
                 <View style={estilo.headerCard}>
                   <Text style={estilo.headerTextCard}>Endereço</Text>
                 </View>

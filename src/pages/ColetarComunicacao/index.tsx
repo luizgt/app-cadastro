@@ -8,6 +8,7 @@ import { render } from "react-dom";
 import { useNavigation } from "@react-navigation/native";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import components from "../../styles/components";
 
 /**
  * tipo de objeto para salvar no armazenamento local.
@@ -47,8 +48,8 @@ export default function ColetarBeneficiosAssistenciais() {
     <View style={estilo.container}>
       <Header estilo={0} titulo="Coletar Dados" />
       <View>
-        <View style={estilo.viewSubTitulo}>
-          <Text style={estilo.textoSubTitulo}>Comunicação</Text>
+        <View style={components.viewSubTitulo}>
+          <Text style={components.textoSubTitulo}>Comunicação</Text>
         </View>
         <View>
           <View style={estilo.viewLinhaPergunta}>
@@ -77,10 +78,10 @@ export default function ColetarBeneficiosAssistenciais() {
 
           <View style={estilo.viewBotaoProximo}>
             <TouchableOpacity
-              style={estilo.botaoProximo}
+              style={components.botaoProximo}
               onPress={handleNavigateToEducacao}
             >
-              <Text style={estilo.textBotaoProximo}>Próximo</Text>
+              <Text style={components.textBotaoProximo}>Próximo</Text>
             </TouchableOpacity>
           </View>
         </View>

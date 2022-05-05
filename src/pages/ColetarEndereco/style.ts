@@ -12,18 +12,6 @@ const estilo = StyleSheet.create({
     marginBottom: 5,
     fontSize: 20,
   },
-  viewSubTitulo: {
-    marginLeft: 1,
-    marginTop: 10,
-    marginBottom: 30,
-    paddingLeft: 15,
-    borderLeftWidth: 3,
-    borderColor: "purple",
-  },
-  textoSubTitulo: {
-    fontSize: 30,
-    color: "purple",
-  },
   viewTextInput: {
     flexDirection: "column",
     justifyContent: "space-between",
@@ -32,25 +20,13 @@ const estilo = StyleSheet.create({
   textItemCidade: {
     fontSize: 20,
     marginLeft: 10,
-    marginBottom: 0
+    marginBottom: -35
   },
   viewBotaoProximo: {
     justifyContent: "center",
     alignItems: "center",
     marginTop: 75,
-  },
-  botaoProximo: {
-    backgroundColor: "#d200d5",
-    width: 85,
-    height: 40,
-    borderRadius: 5,
-    justifyContent: "center",
-    alignItems: "center",
-  },
-  textBotaoProximo: {
-    color: "white",
-    fontSize: 20,
-  },
+  }
 });
 
 export default estilo;

@@ -2,12 +2,14 @@ import React, { useState } from "react";
 import { Text, View } from "react-native";
 import CheckBox from 'expo-checkbox';
 
-import estilo from "./style";
 import Header from "../../components/Header";
 import { render } from "react-dom";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import { useNavigation } from "@react-navigation/native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+
+import estilo from "./style";
+import components from "../../styles/components";
 
 export default function ColetarBeneficiosAssistenciais() {
   const storeData = async (value: Object) => {
@@ -52,8 +54,8 @@ export default function ColetarBeneficiosAssistenciais() {
     <View style={estilo.container}>
       <Header estilo={0} titulo="Coletar Dados" />
       <View>
-        <View style={estilo.viewSubTitulo}>
-          <Text style={estilo.textoSubTitulo}>Benefícios Assistenciais</Text>
+        <View style={components.viewSubTitulo}>
+          <Text style={components.textoSubTitulo}>Benefícios Assistenciais</Text>
         </View>
         <View>
           <View style={estilo.viewLinhaPergunta}>
@@ -118,10 +120,10 @@ export default function ColetarBeneficiosAssistenciais() {
 
           <View style={estilo.viewBotaoProximo}>
             <TouchableOpacity
-              style={estilo.botaoProximo}
+              style={components.botaoProximo}
               onPress={handleNavigateToSocioeconomicos}
             >
-              <Text style={estilo.textBotaoProximo}>Próximo</Text>
+              <Text style={components.textBotaoProximo}>Próximo</Text>
             </TouchableOpacity>
           </View>
         </View>

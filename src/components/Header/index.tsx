@@ -3,11 +3,12 @@ import React from "react";
 import { View, Text } from "react-native";
 
 import estilo from "./style";
+import cores from "../../styles/colors"
 
 const Tela1 = (props: {titulo: string}) => {
   return (
     <View style={[estilo.tamanhoHeader, estilo.headerFundoBranco]}>
-      <Text style={estilo.headerTextRosa}>{props.titulo}</Text>
+      <Text style={[estilo.headerTextRosa, cores.color_azulmedio]}>{props.titulo}</Text>
     </View>
   );
 };
@@ -15,7 +16,7 @@ const Tela1 = (props: {titulo: string}) => {
 const Tela2 = (props: {titulo: string}) => {
   return (
     <View style={[estilo.tamanhoHeader, estilo.headerFundoBranco]}>
-      <Text style={estilo.headerTextRosa}>{props.titulo}</Text>
+      <Text style={[estilo.headerTextRosa, cores.color_azulmedio]}>{props.titulo}</Text>
     </View>
   );
 };

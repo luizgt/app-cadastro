@@ -9,13 +9,15 @@ import cidades from "./cidades";
 import Header from "../../components/Header";
 
 import estilo from "./style";
+import cores from "../../styles/colors";
+import components from "../../styles/components";
 
 export default function ColetarEndereco() {
   const [rua, setRua] = useState("");
   const [numero, setNumero] = useState("");
   const [complemento, setComplemento] = useState("");
   const [bairro, setBairro] = useState("");
-  const [cidade, setCidade] = useState("");
+  const [cidade, setCidade] = useState("Adamantina");
 
   const { navigate } = useNavigation();
 
@@ -36,7 +38,7 @@ export default function ColetarEndereco() {
     try {
       const valueJSON = JSON.stringify(value);
       await AsyncStorage.setItem("endereco_atual", valueJSON);
-      console.log("Enredeço salvo:" + value);
+      //console.log("Enredeço salvo:" + JSON.stringify(value));
     } catch (e) {
       console.log("Erro ao salvar endereço.");
     }
@@ -46,8 +48,8 @@ export default function ColetarEndereco() {
     <View style={estilo.container}>
       <Header estilo={0} titulo="Coletar Dados" />
       <View>
-        <View style={estilo.viewSubTitulo}>
-          <Text style={estilo.textoSubTitulo}>Endereço</Text>
+        <View style={components.viewSubTitulo}>
+          <Text style={components.textoSubTitulo}>Endereço</Text>
         </View>
         <View style={estilo.viewTextInput}>
           <TextInput
@@ -88,10 +90,10 @@ export default function ColetarEndereco() {
       </View>
       <View style={estilo.viewBotaoProximo}>
         <TouchableOpacity
-          style={estilo.botaoProximo}
+          style={components.botaoProximo}
           onPress={handleNavigateToEdificacao}
         >
-          <Text style={estilo.textBotaoProximo}>Próximo</Text>
+          <Text style={components.textBotaoProximo}>Próximo</Text>
         </TouchableOpacity>
       </View>
     </View>
