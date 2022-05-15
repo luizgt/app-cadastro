@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useNavigation } from "@react-navigation/native";
-import { View, Text, TouchableOpacity, AsyncStorage } from "react-native";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import { View, Text, TouchableOpacity, Image } from "react-native";
 
 import estilo from "./style";
 import cores from "../../styles/colors";
@@ -45,6 +46,12 @@ export default function Home() {
 
   return (
     <View style={estilo.container}>
+      <View style={estilo.containerImagem}>
+        <Image
+          style={{height: 450, width: 450, backgroundColor: "black"}}
+          source={require('./../../img/icon.png')}
+        />
+      </View>
       <View style={estilo.container_botoes}>
         <TouchableOpacity
           style={[estilo.botao_comecar, estilo.largura_botoes, cores.background_azulescuro]}

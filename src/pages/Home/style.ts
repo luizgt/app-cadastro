@@ -8,8 +8,16 @@ const estilo = StyleSheet.create({
     flexDirection: "column",
   },
 
+  containerImagem: {
+    width: "100%",
+    height: "45%",
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+  },
+
   container_botoes: {
-    height: "100%",
+    height: "55%",
     justifyContent: "center",
     alignItems: "center",
   },

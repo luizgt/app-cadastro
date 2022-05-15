@@ -26,10 +26,11 @@ const components = StyleSheet.create({
         padding: 5,
         justifyContent: "center",
         alignItems: "center",
+        marginBottom: 15
       },
       textBotaoProximo: {
         color: "white",
-        fontSize: 20,
+        fontSize: 20
     },
 });
 
