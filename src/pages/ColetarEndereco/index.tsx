@@ -1,6 +1,7 @@
 import { useNavigation } from "@react-navigation/native";
 import React, { useState } from "react";
 import { View, Text, TextInput, TouchableOpacity, TouchableHighlight, ScrollView } from "react-native";
+import * as FileSystem from 'expo-file-system';
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import RNPickerSelect from "react-native-picker-select";
 import { Camera } from "expo-camera";
@@ -29,6 +30,7 @@ export default function ColetarEndereco() {
   const [hasPermission, setHasPermission] = useState<any>(null);
   const [type, setType] = useState(Camera.Constants.Type.back);
   const [cameraAberta, setCameraAberta] = useState(false);
+  const [urlImagem, setUrlImagem] = useState('');
 
   const { navigate } = useNavigation();
 
@@ -39,6 +41,7 @@ export default function ColetarEndereco() {
       complemento: complemento,
       bairro: bairro,
       cidade: cidade,
+      urlImagem: urlImagem
     };
     
     await storeData(endereco);
@@ -91,6 +94,24 @@ export default function ColetarEndereco() {
       setCameraAberta(false);
       setPreview(true);
       setFoto(foto_aux);
+
+      let random = parseInt(Math.random()*10000);
+      const nomeImagem = `${Date.now()}-${random}-.jpg`;
+
+      try{
+        await FileSystem.makeDirectoryAsync(`${FileSystem.documentDirectory}imagens`,{intermediates: true});
+        await FileSystem.copyAsync({from: foto_aux.uri, to: `${FileSystem.documentDirectory}imagens/${nomeImagem}`});
+
+        // console.log("nome imagem:")
+        // console.log(`${FileSystem.documentDirectory}imagens/${nomeImagem}`);
+
+        setUrlImagem(`${FileSystem.documentDirectory}imagens/${nomeImagem}`);
+      }catch(err){
+        alert("Imagem não salva " + err);
+        console.log(err);
+      }
+      
+
     }
   }
 
@@ -124,8 +145,7 @@ export default function ColetarEndereco() {
                 style={estilo.textInput}
                 placeholder="Bairro"
                 onChangeText={(text) => setBairro(text)}
-                />
-
+              />
               <Text style={estilo.textItemCidade}>Cidade</Text>
               <RNPickerSelect
                 placeholder={{}}

@@ -1,11 +1,13 @@
 import React, { useEffect, useState } from "react";
 import { useNavigation } from "@react-navigation/native";
-import { View, Text, ScrollView, TouchableHighlight } from "react-native";
+import { View, Text, ScrollView, TouchableHighlight, ImageBackground, Image } from "react-native";
 import Header from "../../components/Header";
 
 import estilo from "./style";
 import colors from "../../styles/colors";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import * as FileSystem from "expo-file-system";
+
 
 export default function GerenciarColetas() {
   const { navigate } = useNavigation();
@@ -29,8 +31,9 @@ export default function GerenciarColetas() {
 
   async function obterDados() {
     let array_dados = await getData("array_coletas");
-    console.log(array_dados);
+    // console.log(array_dados);
     const dado = array_dados === undefined ? [] : await JSON.parse(array_dados);
+
 
     await setDados(dados_coletados.concat(dado));
     // console.log(dados_coletados);
@@ -50,35 +53,43 @@ export default function GerenciarColetas() {
       <Header estilo={0} titulo="Dados Coletados" />
       <ScrollView style={estilo.container}>
         {dados_coletados.map((dado_coleta: Coleta, index) => {
+          console.log(dado_coleta.endereco.urlImagem);
           return (
             <View style={estilo.cardColeta} key={index}>
               <View style={[estilo.viewCardColeta, colors.background_azulmedio]}>
                 <View style={estilo.headerCard}>
                   <Text style={estilo.headerTextCard}>Endereço</Text>
                 </View>
-                <Text style={estilo.textCard}>
-                  {dado_coleta.endereco.rua +
-                    ", " +
-                    dado_coleta.endereco.numero}
-                </Text>
 
-                {dado_coleta.endereco.complemento !== "" ? (
+                <View style={{flexDirection: "row"}}>
                   <View>
                     <Text style={estilo.textCard}>
-                      {dado_coleta.endereco.complemento}
+                      {dado_coleta.endereco.rua +
+                        ", " +
+                        dado_coleta.endereco.numero}
+                    </Text>
+
+                    {dado_coleta.endereco.complemento !== "" ? (
+                      <View>
+                        <Text style={estilo.textCard}>
+                          {dado_coleta.endereco.complemento}
+                        </Text>
+                      </View>
+                    ) : (
+                      <View></View>
+                      )}
+
+                    <Text style={estilo.textCard}>
+                      {dado_coleta.endereco.bairro}
+                    </Text>
+
+                    <Text style={estilo.textCard}>
+                      {dado_coleta.endereco.cidade}
                     </Text>
                   </View>
-                ) : (
-                  <View></View>
-                )}
 
-                <Text style={estilo.textCard}>
-                  {dado_coleta.endereco.bairro}
-                </Text>
-
-                <Text style={estilo.textCard}>
-                  {dado_coleta.endereco.cidade}
-                </Text>
+                  <Image style={{width: 100, height: 100, marginLeft: "auto", marginRight: 5}} source={{uri: dado_coleta.endereco.urlImagem}}/>
+                </View>
 
                 <View style={estilo.viewBotoes}>
                   <TouchableHighlight
@@ -104,7 +115,12 @@ export default function GerenciarColetas() {
   );
 
   async function enviarDadosParaBanco(dados: Coleta) {
-    await fetch("http://192.168.1.103:8080/armazenar_coleta", {
+
+    const info = await FileSystem.getInfoAsync(dados.endereco.urlImagem);
+    const obj_imagem = await FileSystem.readAsStringAsync(dados.endereco.urlImagem, {length: info.size, encoding: FileSystem.EncodingType.Base64});
+    dados.imagem = obj_imagem;
+
+    await fetch("http://192.168.15.40:8000/armazenar_coleta", {
       method: "POST",
       body: JSON.stringify(dados),
       headers: { "Content-Type": "application/json" },
@@ -133,6 +149,7 @@ export default function GerenciarColetas() {
       complemento: string;
       bairro: string;
       cidade: string;
+      urlImagem: string
     };
     terreno: Object;
     edificacao: Object;
@@ -142,5 +159,6 @@ export default function GerenciarColetas() {
     beneficios: Object;
     socioeconomicos: Object;
     doencas: Object;
+    imagem: Object
   };
 }
